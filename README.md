@@ -9,7 +9,15 @@ Full-stack solution for community training centre workshop management, capacity 
 ### Prerequisites
 - **Node.js**: v20+
 - **Yarn**: v1.22+
-- **MongoDB**: Local MongoDB running on `mongodb://127.0.0.1:27017`
+- **MongoDB Atlas:** This project requires MongoDB Atlas to support transactions and sessions.
+
+1. Create a cluster at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+2. Configure database access and add your IP to the network allowlist.
+3. Add your Atlas connection string to the backend `.env` file:
+
+```env
+MONGODB_URI="mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority"
+```
 
 ---
 
