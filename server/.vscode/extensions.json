@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "streetsidesoftware.code-spell-checker",
+    "vivaxy.vscode-conventional-commits",
+    "eamodio.gitlens",
+    "sonarsource.sonarlint-vscode",
+    "gruntfuggly.todo-tree",
+    "ryanluker.vscode-coverage-gutters"
+  ]
+}

@@ -1,0 +1,17 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Academic Cap -->
+  <path d="M50 20L10 40L50 60L90 40L50 20Z" fill="#104e64"/>
+  <path d="M75 45V65" stroke="#104e64" stroke-width="4" stroke-linecap="round"/>
+  <path d="M30 45V55C30 62 50 70 50 70C50 70 70 62 70 55V45" fill="none" stroke="#104e64" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Book/Screen -->
+  <rect x="25" y="50" width="50" height="35" rx="2" fill="none" stroke="#104e64" stroke-width="4"/>
+  
+  <!-- Lines representing text or data -->
+  <line x1="35" y1="60" x2="65" y2="60" stroke="#104e64" stroke-width="3" stroke-linecap="round"/>
+  <line x1="35" y1="68" x2="55" y2="68" stroke="#104e64" stroke-width="3" stroke-linecap="round"/>
+  <line x1="35" y1="76" x2="60" y2="76" stroke="#104e64" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Circle element representing users/students -->
+  <circle cx="70" cy="72" r="6" fill="#104e64"/>
+</svg>

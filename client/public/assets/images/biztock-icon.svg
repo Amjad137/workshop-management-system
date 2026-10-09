@@ -1,0 +1,31 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dashboard/Screen Background -->
+  <rect x="15" y="15" width="70" height="70" rx="5" fill="#104e64"/>
+  
+  <!-- School Building Icon -->
+  <rect x="25" y="30" width="20" height="18" fill="white"/>
+  <polygon points="22,30 35,20 48,30" fill="white"/>
+  <rect x="31" y="40" width="8" height="8" fill="#104e64"/>
+  
+  <!-- Calendar Element -->
+  <rect x="55" y="30" width="20" height="20" rx="2" fill="white"/>
+  <line x1="55" y1="38" x2="75" y2="38" stroke="#104e64" stroke-width="1.5"/>
+  <line x1="60" y1="34" x2="60" y2="48" stroke="#104e64" stroke-width="1"/>
+  <line x1="65" y1="34" x2="65" y2="48" stroke="#104e64" stroke-width="1"/>
+  <line x1="70" y1="34" x2="70" y2="48" stroke="#104e64" stroke-width="1"/>
+  
+  <!-- Student Profiles -->
+  <circle cx="30" cy="60" r="6" fill="white"/>
+  <circle cx="45" cy="60" r="6" fill="white"/>
+  <circle cx="60" cy="60" r="6" fill="white"/>
+  
+  <!-- Data/Progress Bars -->
+  <rect x="25" y="73" width="15" height="4" rx="2" fill="white"/>
+  <rect x="45" y="73" width="20" height="4" rx="2" fill="white"/>
+  <rect x="70" y="73" width="10" height="4" rx="2" fill="white"/>
+  
+  <!-- Menu/Navigation Elements -->
+  <line x1="22" y1="25" x2="32" y2="25" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="22" y1="25" x2="32" y2="25" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <line x1="22" y1="25" x2="32" y2="25" stroke="white" stroke-width="2" stroke-linecap="round"/>
+</svg>
