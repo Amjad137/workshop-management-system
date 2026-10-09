@@ -21,9 +21,10 @@ type Props = {
   isSubmitting: boolean;
   isEditing?: boolean;
   initialData?: ISignupFormValues;
+  readOnlyEmail?: boolean;
 };
 
-const SignUpForm = ({ form, onSubmit, isSubmitting, isEditing }: Props) => {
+const SignUpForm = ({ form, onSubmit, isSubmitting, isEditing, readOnlyEmail }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -52,8 +53,18 @@ const SignUpForm = ({ form, onSubmit, isSubmitting, isEditing }: Props) => {
                 <FormItem>
                   <FormLabel required>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder='johndoe@example.com' {...field} />
+                    <Input
+                      placeholder='johndoe@example.com'
+                      {...field}
+                      readOnly={readOnlyEmail}
+                      className={readOnlyEmail ? 'bg-muted cursor-not-allowed text-muted-foreground' : undefined}
+                    />
                   </FormControl>
+                  {readOnlyEmail && (
+                    <FormDescription className='text-xs text-muted-foreground'>
+                      Assigned to this email address via your staff invitation.
+                    </FormDescription>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
@@ -109,7 +120,6 @@ const SignUpForm = ({ form, onSubmit, isSubmitting, isEditing }: Props) => {
             />
           </div>
         </div>
-        {/* Role based details */}
 
         {/* Security Section */}
         {!isEditing && (

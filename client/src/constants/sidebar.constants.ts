@@ -1,4 +1,4 @@
-import { Calendar, LayoutDashboard, Ticket, Users } from 'lucide-react';
+import { Calendar, LayoutDashboard, Mail, Ticket, Users } from 'lucide-react';
 import { ROUTES } from './routes.constants';
 
 export const SIDEBAR_MENU_CATEGORIES = {
@@ -32,6 +32,11 @@ export const COMMON_SIDEBAR_MENU_ITEMS = {
       name: 'Staff Accounts',
       url: ROUTES.USERS_ROOT,
       icon: Users,
+    },
+    {
+      name: 'Staff Invitations',
+      url: ROUTES.INVITATIONS_ROOT,
+      icon: Mail,
     },
   ],
 };

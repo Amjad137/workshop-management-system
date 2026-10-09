@@ -1,6 +1,5 @@
 'use client';
 
-import { Users } from 'lucide-react';
 import * as React from 'react';
 
 import {
@@ -12,7 +11,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { ROUTES } from '@/constants/routes.constants';
 import { COMMON_SIDEBAR_MENU_ITEMS, SIDEBAR_MENU_CATEGORIES } from '@/constants/sidebar.constants';
 import { VERSION } from '@/version';
 import Image from 'next/image';
@@ -22,13 +20,7 @@ import { SidebarUserMenu } from '../sidebar-user-menu';
 
 export const ADMIN_SIDEBAR_MENU = {
   HOME: COMMON_SIDEBAR_MENU_ITEMS.HOME,
-  USERS: [
-    {
-      name: 'Users',
-      url: ROUTES.USERS_ROOT,
-      icon: Users,
-    },
-  ],
+  USERS: COMMON_SIDEBAR_MENU_ITEMS.USERS,
 };
 
 export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -40,14 +32,14 @@ export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)
             <SidebarMenuButton asChild className='data-[slot=sidebar-menu-button]:!p-1.5'>
               <div className='flex gap-1 h-full items-start'>
                 <Image
-                  src={'/assets/images/biztock-icon.svg'}
-                  alt='Biztock'
+                  src={'/assets/images/Kenora-icon.svg'}
+                  alt='Kenora'
                   width={36}
                   height={36}
                   className='h-12 w-12'
                 />
                 <Link href='#' className='flex flex-col gap-0'>
-                  <span className='text-[22px] font-semibold text-primary'>Biztock</span>
+                  <span className='text-[22px] font-semibold text-primary'>Kenora</span>
                   <span className='text-[10px]'>version {VERSION}</span>
                 </Link>
               </div>

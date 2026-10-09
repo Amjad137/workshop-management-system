@@ -28,7 +28,7 @@
     "build:qa": "yarn run env:copy:qa && yarn run build",
     "build:staging": "yarn run env:copy:staging && yarn run build",
     "build:production": "yarn run env:copy:production && yarn run build",
-    "seed": "tsup src/seed.ts && node ./dist/seed.js",
+    "seed": "tsup scripts/seed.ts && node ./dist/seed.js",
     "prepare": "husky install",
     "kill": "echo 'Enter port number' && read port && kill $(lsof -t -i:$port)",
     "release:pre": "yarn version --prerelease && yarn extract",

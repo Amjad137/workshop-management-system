@@ -8,6 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { Calendar, MapPin, User, Plus, History, Pencil } from 'lucide-react';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes.constants';
+import { formatDate } from '@/utils/common-utils';
 
 interface WorkshopCardProps {
   workshop: IWorkshop;
@@ -26,21 +27,6 @@ export const WorkshopCard = ({
   const isFull = seatsRemaining <= 0;
   const percentage = Math.min(100, Math.round((ws.activeRegistrationsCount / ws.capacity) * 100));
 
-  const formatDate = (dateStr: string) => {
-    try {
-      const d = new Date(dateStr);
-      return d.toLocaleDateString('en-GB', {
-        weekday: 'short',
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-      });
-    } catch {
-      return dateStr;
-    }
-  };
 
   return (
     <Card className='flex flex-col justify-between overflow-hidden hover:shadow-md transition-shadow border-border bg-card'>
@@ -55,15 +41,15 @@ export const WorkshopCard = ({
                 ws.status === WORKSHOP_STATUS.CANCELLED
                   ? 'destructive'
                   : isFull
-                  ? 'destructive'
-                  : 'secondary'
+                    ? 'destructive'
+                    : 'secondary'
               }
             >
               {ws.status === WORKSHOP_STATUS.CANCELLED
                 ? 'Cancelled'
                 : isFull
-                ? 'Full Capacity'
-                : `${seatsRemaining} seats left`}
+                  ? 'Full Capacity'
+                  : `${seatsRemaining} seats left`}
             </Badge>
           </div>
 

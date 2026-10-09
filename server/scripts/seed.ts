@@ -1,35 +1,39 @@
+import 'dotenv/config';
 import connect, { disconnect } from '@/config/db.config';
-import { auth } from '@/config/better-auth';
 import { Workshop, WORKSHOP_STATUS } from '@/models/workshop.model';
 import { Registration, REGISTRATION_STATUS } from '@/models/registration.model';
 import { SYSTEM_ROLE } from '@/constants/user.constants';
 import { userRepository } from '@/Repositories/user.repository';
 
 const seed = async () => {
+  const commonPassword = 'Password123!';
   try {
     console.log('🌱 Starting Database Seeding...');
     const connected = await connect();
     if (!connected) throw new Error('Database connection failed');
 
+    // Dynamic import of BetterAuth so it receives an already-connected database
+    const { auth } = await import('@/config/better-auth');
+
     // 1. Seed Users (Admin, Manager, Staff)
     const seedUsers = [
       {
         email: 'admin@workshop.com',
-        password: 'Password123!',
+        password: commonPassword,
         name: 'System Admin',
         role: SYSTEM_ROLE.ADMIN,
         phoneNumber: '+15550001'
       },
       {
         email: 'manager@workshop.com',
-        password: 'Password123!',
+        password: commonPassword,
         name: 'Programme Manager (Alice)',
         role: SYSTEM_ROLE.MANAGER,
         phoneNumber: '+15550002'
       },
       {
         email: 'staff@workshop.com',
-        password: 'Password123!',
+        password: commonPassword,
         name: 'Front Desk Staff (Bob)',
         role: SYSTEM_ROLE.STAFF,
         phoneNumber: '+15550003'

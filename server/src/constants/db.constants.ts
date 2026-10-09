@@ -9,7 +9,8 @@ export enum COLLECTIONS {
   AUDIT_LOGS = 'audit_logs',
   WORKSHOP = 'workshops',
   REGISTRATION = 'registrations',
-  WAITLIST = 'waitlists'
+  WAITLIST = 'waitlists',
+  USER_INVITATIONS = 'user_invitations'
 }
 
 export enum ENTITY_STATUS {

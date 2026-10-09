@@ -53,12 +53,36 @@ registrationRoutes.post(
   registrationController.addToWaitlist
 );
 
+/*-----------Get All Waitlists (Manager & Staff Only)--------------*/
+registrationRoutes.get(
+  '/waitlists',
+  validateUser,
+  validateManagerOrStaff,
+  registrationController.getAllWaitlists
+);
+
 /*-----------Get Workshop Waitlist (Bonus)--------------*/
 registrationRoutes.get(
   '/waitlist/:id',
   validateUser,
   validateManagerOrStaff,
   registrationController.getWaitlistByWorkshopId
+);
+
+/*-----------Promote Waitlisted Attendee (Manager & Staff Only)--------------*/
+registrationRoutes.post(
+  '/waitlist/:id/promote',
+  validateUser,
+  validateManagerOrStaff,
+  registrationController.promoteFromWaitlist
+);
+
+/*-----------Remove Attendee from Waitlist (Manager & Staff Only)--------------*/
+registrationRoutes.delete(
+  '/waitlist/:id',
+  validateUser,
+  validateManagerOrStaff,
+  registrationController.removeFromWaitlist
 );
 
 export default registrationRoutes;

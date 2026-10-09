@@ -11,8 +11,6 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { COMMON_SIDEBAR_MENU_ITEMS, SIDEBAR_MENU_CATEGORIES } from '@/constants/sidebar.constants';
-import { VERSION } from '@/version';
-import Image from 'next/image';
 import Link from 'next/link';
 import SidebarNavGroup from '../sidebar-nav-group';
 import { SidebarUserMenu } from '../sidebar-user-menu';

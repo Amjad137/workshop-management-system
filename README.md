@@ -23,7 +23,7 @@ yarn install
 
 # Seed Admin, Manager, Staff accounts & sample workshops
 yarn seed
-# (or: npx tsx src/seed.ts)
+# (or: npx tsx scripts/seed.ts)
 
 # Start the Express API server (runs on port 8000)
 yarn start:local

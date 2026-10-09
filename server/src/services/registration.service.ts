@@ -273,6 +273,103 @@ export class RegistrationService {
   public getWaitlistByWorkshopId = async (workshopId: string) => {
     return waitlistRepository.findActiveByWorkshop(workshopId);
   };
+
+  /**
+   * Get all active waitlist entries with workshop details (optionally filtered by workshopId or search)
+   */
+  public getAllWaitlists = async (query: {
+    workshopId?: string;
+    search_key?: string;
+    limit?: number;
+    skip?: number;
+  }) => {
+    const { Waitlist } = await import('@/models/waitlist.model');
+    const filter: Record<string, unknown> = {
+      status: WAITLIST_STATUS.WAITING
+    };
+
+    if (query.workshopId && Types.ObjectId.isValid(query.workshopId)) {
+      filter.workshopId = new Types.ObjectId(query.workshopId);
+    }
+
+    if (query.search_key) {
+      filter.$or = [
+        { attendeeName: { $regex: query.search_key, $options: 'i' } },
+        { attendeeEmail: { $regex: query.search_key, $options: 'i' } }
+      ];
+    }
+
+    const limit = query.limit || 50;
+    const skip = query.skip || 0;
+
+    const [results, total] = await Promise.all([
+      Waitlist.find(filter)
+        .populate('workshopId', 'title code location date capacity activeRegistrationsCount status')
+        .sort({ createdAt: 1 })
+        .skip(skip)
+        .limit(limit),
+      Waitlist.countDocuments(filter)
+    ]);
+
+    return {
+      results,
+      extras: { total, limit, skip }
+    };
+  };
+
+  /**
+   * Remove/cancel an attendee from the waitlist
+   */
+  public removeFromWaitlist = async (waitlistId: string) => {
+    if (!Types.ObjectId.isValid(waitlistId)) {
+      throw new BadRequestException(ERROR_MESSAGES.INVALID_OBJECT_ID);
+    }
+
+    const { Waitlist } = await import('@/models/waitlist.model');
+    const item = await Waitlist.findById(waitlistId);
+    if (!item) {
+      throw new NotFoundException('Waitlist entry not found.');
+    }
+
+    await Waitlist.findByIdAndUpdate(waitlistId, {
+      $set: { status: WAITLIST_STATUS.CANCELLED }
+    });
+
+    return { message: 'Attendee successfully removed from waitlist.' };
+  };
+
+  /**
+   * Promote an attendee from the waitlist into a confirmed registration
+   */
+  public promoteFromWaitlist = async (waitlistId: string, user: IUser) => {
+    if (!Types.ObjectId.isValid(waitlistId)) {
+      throw new BadRequestException(ERROR_MESSAGES.INVALID_OBJECT_ID);
+    }
+
+    const { Waitlist } = await import('@/models/waitlist.model');
+    const item = await Waitlist.findById(waitlistId);
+    if (!item || item.status !== WAITLIST_STATUS.WAITING) {
+      throw new BadRequestException('Attendee is no longer on the active waiting queue.');
+    }
+
+    // Attempt to register the attendee into the workshop (atomically checks capacity)
+    const registration = await this.registerAttendee(
+      {
+        workshopId: item.workshopId.toString(),
+        attendeeName: item.attendeeName,
+        attendeeEmail: item.attendeeEmail,
+        notes: item.notes ? `Promoted from queue. ${item.notes}` : 'Promoted from queue'
+      },
+      user
+    );
+
+    // Mark waitlist as PROMOTED
+    await Waitlist.findByIdAndUpdate(waitlistId, {
+      $set: { status: WAITLIST_STATUS.PROMOTED }
+    });
+
+    return registration;
+  };
 }
 
 export const registrationService = new RegistrationService();

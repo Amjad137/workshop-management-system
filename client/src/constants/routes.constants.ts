@@ -8,6 +8,7 @@ export const ROUTES = {
   RESET_PASSWORD: '/auth/reset-password',
 
   USERS_ROOT: '/portal/users', // Access: Admin
+  INVITATIONS_ROOT: '/portal/invitations', // Access: Admin
   WORKSHOPS_ROOT: '/portal/workshops', // Access: Manager, Staff
   REGISTRATIONS_ROOT: '/portal/registrations', // Access: Manager, Staff
   AUDIT_LOGS_ROOT: '/portal/audit-logs', // Access: Admin, Manager
@@ -16,6 +17,7 @@ export const ROUTES = {
 export const ADMIN_ROUTES = {
   ROOT: ROUTES.SAAS_ROOT,
   USERS_ROOT: ROUTES.USERS_ROOT,
+  INVITATIONS_ROOT: ROUTES.INVITATIONS_ROOT,
   AUDIT_LOGS_ROOT: ROUTES.AUDIT_LOGS_ROOT,
 };
 
@@ -31,3 +33,20 @@ export const STAFF_ROUTES = {
   WORKSHOPS_ROOT: ROUTES.WORKSHOPS_ROOT,
   REGISTRATIONS_ROOT: ROUTES.REGISTRATIONS_ROOT,
 };
+
+export const ADMIN_ONLY_PATHS = [
+  ROUTES.USERS_ROOT,
+  ROUTES.INVITATIONS_ROOT,
+];
+
+export const MANAGER_OR_STAFF_ONLY_PATHS = [
+  ROUTES.WORKSHOPS_ROOT,
+  ROUTES.REGISTRATIONS_ROOT,
+];
+
+export const STAFF_RESTRICTED_PATHS = [
+  ROUTES.AUDIT_LOGS_ROOT,
+  ROUTES.USERS_ROOT,
+  ROUTES.INVITATIONS_ROOT,
+];
+

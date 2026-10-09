@@ -2,14 +2,19 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   addAttendeeToWaitlist,
   cancelRegistration,
+  fetchAllWaitlists,
   fetchRegistrations,
   fetchWorkshopHistory,
+  fetchWorkshopWaitlist,
+  promoteFromWaitlist,
   registerAttendee,
+  removeFromWaitlist,
 } from '@/services/registration.service';
 import {
   ICancelRegistrationPayload,
   IRegisterAttendeePayload,
   IRegistrationQuery,
+  IWaitlistQuery,
 } from '@/types/registration.type';
 import { toast } from './use-toast';
 
@@ -126,6 +131,8 @@ export const useAddToWaitlist = () => {
         description: `${variables.attendeeName} is queued for this workshop.`,
       });
       queryClient.invalidateQueries({ queryKey: ['registrations'] });
+      queryClient.invalidateQueries({ queryKey: ['waitlists'] });
+      queryClient.invalidateQueries({ queryKey: ['workshopWaitlist', variables.workshopId] });
       queryClient.invalidateQueries({ queryKey: ['workshops'] });
     },
     onError: () => {
@@ -133,3 +140,67 @@ export const useAddToWaitlist = () => {
     },
   });
 };
+
+export const useGetAllWaitlists = (
+  params?: IWaitlistQuery,
+  options?: { enabled?: boolean },
+) => {
+  const { isLoading, data, error, refetch } = useQuery({
+    queryKey: ['waitlists', params],
+    queryFn: () => fetchAllWaitlists(params),
+    enabled: options?.enabled ?? true,
+  });
+
+  return {
+    isLoading,
+    data: data?.results ?? [],
+    extras: data?.extras ?? { total: 0, limit: 50, skip: 0 },
+    error,
+    refetch,
+  };
+};
+
+export const useGetWorkshopWaitlist = (
+  workshopId: string,
+  options?: { enabled?: boolean },
+) => {
+  const { isLoading, data, error, refetch } = useQuery({
+    queryKey: ['workshopWaitlist', workshopId],
+    queryFn: () => fetchWorkshopWaitlist(workshopId),
+    enabled: (options?.enabled ?? true) && Boolean(workshopId),
+  });
+
+  return {
+    isLoading,
+    data: data ?? [],
+    error,
+    refetch,
+  };
+};
+
+export const useRemoveFromWaitlist = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (waitlistId: string) => removeFromWaitlist(waitlistId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['waitlists'] });
+      queryClient.invalidateQueries({ queryKey: ['workshopWaitlist'] });
+    },
+  });
+};
+
+export const usePromoteFromWaitlist = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (waitlistId: string) => promoteFromWaitlist(waitlistId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['registrations'] });
+      queryClient.invalidateQueries({ queryKey: ['waitlists'] });
+      queryClient.invalidateQueries({ queryKey: ['workshopWaitlist'] });
+      queryClient.invalidateQueries({ queryKey: ['workshops'] });
+    },
+  });
+};
+

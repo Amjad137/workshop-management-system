@@ -5,6 +5,8 @@ import {
   IRegisterAttendeePayload,
   IRegistration,
   IRegistrationQuery,
+  IWaitlist,
+  IWaitlistQuery,
 } from '@/types/registration.type';
 import { toast } from '@/hooks/use-toast';
 import ErrorHandler from '@/utils/error-handler';
@@ -120,3 +122,90 @@ export const addAttendeeToWaitlist = async (payload: IRegisterAttendeePayload) =
     throw err;
   }
 };
+
+export const fetchAllWaitlists = async (params?: IWaitlistQuery) => {
+  try {
+    const response = await Axios.get<
+      ICommonResponseDTO<IPaginatedResponseDTO<IWaitlist, IBasePaginationExtras>>
+    >('/v1/registration/waitlists', {
+      params,
+    });
+    return response.data.data;
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      const { errorMessage } = ErrorHandler(err);
+      toast({
+        title: 'Error Loading Waitlists',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    }
+    throw err;
+  }
+};
+
+export const fetchWorkshopWaitlist = async (workshopId: string) => {
+  try {
+    const response = await Axios.get<ICommonResponseDTO<IWaitlist[]>>(
+      `/v1/registration/waitlist/${workshopId}`,
+    );
+    return response.data.data ?? [];
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      const { errorMessage } = ErrorHandler(err);
+      toast({
+        title: 'Error Loading Workshop Waitlist',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    }
+    throw err;
+  }
+};
+
+export const removeFromWaitlist = async (waitlistId: string) => {
+  try {
+    const response = await Axios.delete<ICommonResponseDTO<{ message: string }>>(
+      `/v1/registration/waitlist/${waitlistId}`,
+    );
+    toast({
+      title: 'Removed from Waitlist',
+      description: 'Attendee was successfully removed from the waitlist.',
+    });
+    return response.data.data;
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      const { errorMessage } = ErrorHandler(err);
+      toast({
+        title: 'Failed to Remove',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    }
+    throw err;
+  }
+};
+
+export const promoteFromWaitlist = async (waitlistId: string) => {
+  try {
+    const response = await Axios.post<ICommonResponseDTO<IRegistration>>(
+      `/v1/registration/waitlist/${waitlistId}/promote`,
+    );
+    toast({
+      title: 'Attendee Promoted! 🎉',
+      description: 'Attendee has been officially registered into the workshop.',
+    });
+    return response.data.data;
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      const { errorMessage } = ErrorHandler(err);
+      toast({
+        title: 'Promotion Failed',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    }
+    throw err;
+  }
+};
+

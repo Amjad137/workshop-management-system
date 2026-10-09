@@ -20,6 +20,49 @@ export const auth = betterAuth({
     client: getMongoClient()
   }),
 
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user, ctx) => {
+          const invitationCode = ctx?.body?.invitationCode as string | undefined;
+          if (invitationCode) {
+            const { userInvitationRepository } = await import(
+              '@/Repositories/user-invitation.repository'
+            );
+            const invitation = await userInvitationRepository.findByCode(invitationCode);
+            if (!invitation || invitation.isUsed || invitation.expiresAt < new Date()) {
+              throw new APIError('BAD_REQUEST', {
+                message: 'Invalid, expired, or already used invitation code.'
+              });
+            }
+
+            if (user.email.toLowerCase() !== invitation.email.toLowerCase()) {
+              throw new APIError('BAD_REQUEST', {
+                message: 'Email address does not match the invitation.'
+              });
+            }
+
+            return {
+              data: {
+                ...user,
+                role: invitation.role
+              }
+            };
+          }
+        },
+        after: async (user, ctx) => {
+          const invitationCode = ctx?.body?.invitationCode as string | undefined;
+          if (invitationCode) {
+            const { userInvitationRepository } = await import(
+              '@/Repositories/user-invitation.repository'
+            );
+            await userInvitationRepository.markAsUsed(invitationCode, user.id);
+          }
+        }
+      }
+    }
+  },
+
   user: {
     additionalFields: {
       phoneNumber: {

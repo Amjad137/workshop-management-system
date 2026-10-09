@@ -27,7 +27,7 @@ export function DynamicBreadcrumb() {
     // Special case for home page
     if (pathname === '/') {
       return [
-        { href: '/', title: 'Biztock' },
+        { href: '/', title: 'Kenora' },
         { href: '/', title: 'Dashboard' },
       ];
     }
@@ -41,7 +41,7 @@ export function DynamicBreadcrumb() {
       return { href, title };
     });
 
-    return [{ href: '/', title: 'Biztock' }, ...crumbList];
+    return [{ href: '/', title: 'Kenora' }, ...crumbList];
   }, [pathname]);
 
   return (

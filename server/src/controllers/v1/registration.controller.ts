@@ -84,3 +84,39 @@ export const getWaitlistByWorkshopId = async (req: Request, res: Response, next:
     return next(error);
   }
 };
+
+export const getAllWaitlists = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { workshopId, search_key, limit, skip } = req.query;
+    const result = await registrationService.getAllWaitlists({
+      workshopId: workshopId as string | undefined,
+      search_key: search_key as string | undefined,
+      limit: limit ? Number(limit) : undefined,
+      skip: skip ? Number(skip) : undefined
+    });
+    return res.status(StatusCodes.OK).json(result);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const removeFromWaitlist = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const result = await registrationService.removeFromWaitlist(id);
+    return res.status(StatusCodes.OK).json(result);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const promoteFromWaitlist = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const result = await registrationService.promoteFromWaitlist(id, req.user as IUser);
+    return res.status(StatusCodes.CREATED).json(result);
+  } catch (error) {
+    return next(error);
+  }
+};
+

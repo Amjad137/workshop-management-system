@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useAuthStore } from '@/stores/auth.store';
 import { useUpdatePassword } from '@/hooks/use-auth';
 import { passwordStrength } from './sign-up/schema/sign-up.schema';
 
@@ -34,7 +33,6 @@ interface UpdatePasswordModalProps {
 }
 
 const UpdatePasswordModal = ({ open, setOpen }: UpdatePasswordModalProps) => {
-  const { user } = useAuthStore();
   const updatePasswordMutation = useUpdatePassword();
 
   const form = useForm<PasswordFormValues>({

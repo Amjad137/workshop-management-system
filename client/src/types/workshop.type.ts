@@ -1,3 +1,5 @@
+import { ENTITY_SORT } from "@/constants/common.constants";
+
 export enum WORKSHOP_STATUS {
   SCHEDULED = 'SCHEDULED',
   IN_PROGRESS = 'IN_PROGRESS',
@@ -27,7 +29,7 @@ export interface IWorkshopQuery {
   limit?: number;
   skip?: number;
   sort_by?: string;
-  sort_order?: 'asc' | 'desc';
+  sort_order?: ENTITY_SORT;
   search_key?: string;
   from_date?: string;
   to_date?: string;

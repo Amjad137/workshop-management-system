@@ -2,7 +2,6 @@
 
 import { Table } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
-import { IRegistration } from '@/types/registration.type';
 import { ROUTES } from '@/constants/routes.constants';
 import Link from 'next/link';
 import { Calendar } from 'lucide-react';

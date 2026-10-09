@@ -14,7 +14,7 @@ interface RootLayoutProps {
 }
 
 export const metadata: Metadata = {
-  title: { default: 'Biztock', template: '%s | Biztock Template' },
+  title: { default: 'Kenora', template: '%s | Kenora Template' },
   description: "Let's Turn the Ideas into Reality with Technology",
 };
 

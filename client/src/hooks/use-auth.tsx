@@ -19,6 +19,7 @@ type SignUpPayload = {
   phoneNumber: string;
   address: string;
   image?: string;
+  invitationCode?: string;
 };
 
 type ResetPasswordPayload = {

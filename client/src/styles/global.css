@@ -8,70 +8,124 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 244 47% 10%;
+    /* Base background & text (Light Mode - Crisp Slate / Deep Navy text) */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
 
+    /* Card & Popovers */
     --card: 0 0% 100%;
-    --card-foreground: 244 47% 10%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 244 47% 10%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 243 75% 59%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary: Authoritative Deep Navy */
+    --primary: 222 62% 38%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 226 100% 97%;
-    --secondary-foreground: 244 47% 20%;
+    /* Secondary: Soft cool ice-slate */
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 14%;
 
-    --muted: 226 60% 96%;
-    --muted-foreground: 240 8% 46%;
+    /* Muted elements */
+    --muted: 214 32% 91%;
+    --muted-foreground: 217 19% 45%;
 
-    --accent: 225 100% 94%;
-    --accent-foreground: 244 47% 20%;
+    /* Accent elements */
+    --accent: 214 32% 93%;
+    --accent-foreground: 222 47% 14%;
 
+    /* Status & Alerts */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 226 40% 90%;
-    --input: 226 40% 90%;
-    --ring: 243 75% 59%;
+    /* Borders, Inputs & Focus ring */
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 222 62% 38%;
     --radius: 0.5rem;
 
-    --scrollbar-thumb: hsl(243 75% 59% / 0.25);
-    --scrollbar-track: hsl(226 60% 96%);
+    /* Charts */
+    --chart-1: 222 62% 38%;
+    --chart-2: 213 94% 52%;
+    --chart-3: 199 89% 48%;
+    --chart-4: 160 60% 45%;
+    --chart-5: 38 92% 50%;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 222 62% 38%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 214 32% 91%;
+    --sidebar-accent-foreground: 222 47% 14%;
+    --sidebar-border: 214 32% 88%;
+    --sidebar-ring: 222 62% 38%;
+
+    /* Scrollbar */
+    --scrollbar-thumb: hsl(222 62% 38% / 0.25);
+    --scrollbar-thumb-hover: hsl(222 62% 38% / 0.45);
+    --scrollbar-track: hsl(214 32% 94%);
   }
 
   .dark {
-    --background: 244 40% 8%;
-    --foreground: 0 0% 98%;
+    /* Base background & text (Dark Mode - Midnight Deep Navy) */
+    --background: 222 47% 8%;
+    --foreground: 210 40% 98%;
 
-    --card: 244 35% 11%;
-    --card-foreground: 0 0% 98%;
+    /* Card & Popovers (Subtle elevated navy slate) */
+    --card: 222 44% 12%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 244 35% 11%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 222 44% 12%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 243 80% 68%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary: Luminous Cobalt / Sapphire Blue for crisp contrast */
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 8%;
 
-    --secondary: 244 30% 18%;
-    --secondary-foreground: 0 0% 98%;
+    /* Secondary: Deep Slate Navy */
+    --secondary: 222 35% 18%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 244 30% 18%;
-    --muted-foreground: 240 8% 65%;
+    /* Muted elements */
+    --muted: 222 35% 18%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 244 30% 22%;
-    --accent-foreground: 0 0% 98%;
+    /* Accent elements */
+    --accent: 222 35% 22%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    /* Status & Alerts */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 244 30% 20%;
-    --input: 244 30% 20%;
-    --ring: 243 80% 68%;
+    /* Borders, Inputs & Focus ring */
+    --border: 222 35% 20%;
+    --input: 222 35% 20%;
+    --ring: 217 91% 60%;
 
-    --scrollbar-thumb: hsl(243 80% 68% / 0.3);
-    --scrollbar-track: hsl(244 30% 14%);
+    /* Charts */
+    --chart-1: 217 91% 60%;
+    --chart-2: 199 89% 48%;
+    --chart-3: 213 94% 68%;
+    --chart-4: 160 60% 55%;
+    --chart-5: 43 96% 56%;
+
+    /* Sidebar */
+    --sidebar-background: 222 47% 7%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 222 35% 18%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 35% 18%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* Scrollbar */
+    --scrollbar-thumb: hsl(217 91% 60% / 0.35);
+    --scrollbar-thumb-hover: hsl(217 91% 60% / 0.6);
+    --scrollbar-track: hsl(222 44% 11%);
   }
 }
 
@@ -92,8 +146,8 @@ body {
   }
 
   ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
   }
 
   ::-webkit-scrollbar-track {
@@ -107,6 +161,6 @@ body {
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(243 75% 59% / 0.45);
+    background: var(--scrollbar-thumb-hover);
   }
 }

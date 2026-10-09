@@ -81,3 +81,7 @@ the API, structure the frontend, and enforce access control, and whether the cap
 when requests arrive at the same moment.
 A clean, connected, working application will always score higher than a feature-heavy but broken
 one.
+
+Admin:   admin@workshop.com   / Password123!
+Manager: manager@workshop.com / Password123!
+Staff:   staff@workshop.com   / Password123!

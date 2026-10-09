@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": false,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
@@ -17,6 +18,14 @@
     "@typescript-eslint",
     "sonarjs"
   ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
+  },
   "root": true,
   "rules": {
     "sonarjs/cognitive-complexity": "off",

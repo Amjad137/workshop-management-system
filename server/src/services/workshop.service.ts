@@ -94,12 +94,10 @@ export class WorkshopService {
       throw new NotFoundException(ERROR_MESSAGES.WORKSHOP_NOT_FOUND);
     }
 
-    if (payload.capacity !== undefined) {
-      if (payload.capacity < workshop.activeRegistrationsCount) {
-        throw new BadRequestException(
-          `Cannot reduce capacity to ${payload.capacity}. There are currently ${workshop.activeRegistrationsCount} active registrations.`
-        );
-      }
+    if (payload.capacity !== undefined && payload.capacity < workshop.activeRegistrationsCount) {
+      throw new BadRequestException(
+        `Cannot reduce capacity to ${payload.capacity}. There are currently ${workshop.activeRegistrationsCount} active registrations.`
+      );
     }
 
     const previousValues = workshop.toObject();

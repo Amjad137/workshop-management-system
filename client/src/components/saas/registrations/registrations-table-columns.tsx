@@ -7,22 +7,7 @@ import { DataTableColumnHeader } from '@/components/ui/data-table/table-column-h
 import { IRegistration, REGISTRATION_STATUS } from '@/types/registration.type';
 import RegistrationsActionsDropdown from './registrations-actions-dropdown';
 import { User, Calendar, ShieldAlert } from 'lucide-react';
-
-const formatDateTime = (dateStr?: string) => {
-  if (!dateStr) return '—';
-  try {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  } catch {
-    return dateStr;
-  }
-};
+import { formatDateTime } from '@/utils/date-utils';
 
 export const registrationsTableColumns: ColumnDef<IRegistration>[] = [
   {

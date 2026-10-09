@@ -31,9 +31,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import Link from 'next/link';
 import { useCreateUserAccount } from '@/hooks/use-users';
 import { USER_ROLE } from '@/constants/user.constants';
-import { UserPlus } from 'lucide-react';
+import { ROUTES } from '@/constants/routes.constants';
+import { UserPlus, Info } from 'lucide-react';
 
 const createUserSchema = object({
   name: string().required('Full name is required').trim(),
@@ -81,7 +83,7 @@ export function CreateUserDialog() {
         email: '',
         role: USER_ROLE.STAFF,
         phoneNumber: '',
-        password: 'Password123!',
+        password: '',
       });
       setOpen(false);
     } catch {
@@ -104,6 +106,29 @@ export function CreateUserDialog() {
             Admin provisioned account creation. Newly created staff can sign in immediately.
           </DialogDescription>
         </DialogHeader>
+
+        <div className='flex items-start gap-2.5 rounded-lg border border-primary/20 bg-primary/5 p-3 text-xs text-foreground/90'>
+          <Info className='h-4 w-4 shrink-0 text-primary mt-0.5' />
+          <div className='space-y-1'>
+            <p className='font-medium text-foreground'>
+              Recommended: Use Staff Invitation Flow
+            </p>
+            <p className='text-muted-foreground'>
+              For better security, invite new staff by email so they can safely configure their own credentials on onboarding.
+            </p>
+            <Button
+              variant='link'
+              size='sm'
+              className='h-auto p-0 text-xs font-semibold text-primary underline'
+              asChild
+              onClick={() => setOpen(false)}
+            >
+              <Link href={ROUTES.INVITATIONS_ROOT}>
+                Go to Staff Invitations &rarr;
+              </Link>
+            </Button>
+          </div>
+        </div>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4 pt-2'>
