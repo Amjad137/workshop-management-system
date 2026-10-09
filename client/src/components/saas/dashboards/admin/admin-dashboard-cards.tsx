@@ -1,6 +1,6 @@
 'use client';
 
-import { LucideProps, Users, Mail, UserCheck, Shield } from 'lucide-react';
+import { LucideProps, Users, Mail, UserCheck, Send } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ROUTES } from '@/constants/routes.constants';
 import { useGetAllUsersCount } from '@/hooks/use-users';
@@ -20,8 +20,9 @@ interface IAdminCardData {
 
 export function AdminDashboardCards() {
   const { data: allUsersCount, isLoading: isLoadingUsersCount } = useGetAllUsersCount();
-  const { data: invitations, isLoading: isLoadingInvitations } = useGetAllInvitations({ limit: 50 });
+  const { data: invitations, isLoading: isLoadingInvitations } = useGetAllInvitations({ limit: 100 });
 
+  const totalInvitationsCount = invitations?.length ?? 0;
   const pendingInvitationsCount = (invitations || []).filter((inv) => !inv.isUsed).length;
   const claimedInvitationsCount = (invitations || []).filter((inv) => inv.isUsed).length;
 
@@ -30,11 +31,21 @@ export function AdminDashboardCards() {
       logo: Users,
       title: 'Total Staff Accounts',
       value: allUsersCount ?? 0,
-      subTitle: 'Active team & management profiles',
+      subTitle: 'Active team & staff profiles',
       navString: ROUTES.USERS_ROOT,
       isLoading: isLoadingUsersCount,
       accentColor: 'text-blue-500',
       badgeBg: 'bg-blue-500/10',
+    },
+    {
+      logo: Send,
+      title: 'Total Invitations Issued',
+      value: totalInvitationsCount,
+      subTitle: 'All onboarding invitations generated',
+      navString: ROUTES.INVITATIONS_ROOT,
+      isLoading: isLoadingInvitations,
+      accentColor: 'text-amber-500',
+      badgeBg: 'bg-amber-500/10',
     },
     {
       logo: Mail,
@@ -55,16 +66,6 @@ export function AdminDashboardCards() {
       isLoading: isLoadingInvitations,
       accentColor: 'text-emerald-500',
       badgeBg: 'bg-emerald-500/10',
-    },
-    {
-      logo: Shield,
-      title: 'Audit Logs & Governance',
-      value: 'Enabled',
-      subTitle: 'Role tracking & access control',
-      navString: ROUTES.AUDIT_LOGS_ROOT,
-      isLoading: false,
-      accentColor: 'text-amber-500',
-      badgeBg: 'bg-amber-500/10',
     },
   ];
 

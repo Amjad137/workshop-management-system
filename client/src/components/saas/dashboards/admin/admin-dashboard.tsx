@@ -48,7 +48,7 @@ export default function AdminDashboard() {
     navigator.clipboard.writeText(url);
     toast({
       title: 'Invite Link Copied 📋',
-      description: 'Registration URL has been copied to your clipboard.',
+      description: 'Invite sign-up URL has been copied to your clipboard.',
     });
   };
 
@@ -168,52 +168,52 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
 
-          {/* Security & Role Privileges Overview */}
+          {/* Team Onboarding & Governance Overview */}
           <Card className='border border-border/70 shadow-sm'>
             <CardHeader className='pb-3'>
               <CardTitle className='text-base font-bold tracking-tight flex items-center gap-2'>
                 <ShieldCheck className='h-4 w-4 text-emerald-500' />
-                Role-Based Access Control (RBAC) Architecture
+                Team Onboarding & Account Governance Lifecycle
               </CardTitle>
               <CardDescription className='text-xs mt-0.5'>
-                Strictly separated domain privileges enforced at edge middleware and backend routes
+                Centralised workflow for inviting, provisioning, and managing organizational access
               </CardDescription>
             </CardHeader>
             <CardContent className='pt-0 space-y-3'>
               <div className='grid grid-cols-1 sm:grid-cols-3 gap-3'>
-                <div className='rounded-lg border border-destructive/20 bg-destructive/5 p-3 space-y-1.5'>
-                  <div className='flex items-center gap-1.5 font-semibold text-xs text-foreground'>
-                    <Badge variant='destructive' className='text-[9px] px-1 py-0 uppercase font-mono'>
-                      ADMIN
-                    </Badge>
-                    <span>System Admin</span>
-                  </div>
-                  <p className='text-[11px] text-muted-foreground'>
-                    Full governance over staff accounts, email invitation tokens, and system audit logs.
-                  </p>
-                </div>
-
                 <div className='rounded-lg border border-primary/20 bg-primary/5 p-3 space-y-1.5'>
                   <div className='flex items-center gap-1.5 font-semibold text-xs text-foreground'>
-                    <Badge variant='secondary' className='text-[9px] px-1 py-0 uppercase font-mono'>
-                      MANAGER
+                    <Badge variant='outline' className='text-[9px] px-1 py-0 uppercase font-mono'>
+                      STEP 1
                     </Badge>
-                    <span>Programme Manager</span>
+                    <span>Issue Invitation</span>
                   </div>
                   <p className='text-[11px] text-muted-foreground'>
-                    Workshop creation, capacity limits, waitlist overrides, and cancellation logs.
+                    Generate time-bound invite tokens specifying the team member&apos;s role and email address.
                   </p>
                 </div>
 
-                <div className='rounded-lg border border-border bg-muted/30 p-3 space-y-1.5'>
+                <div className='rounded-lg border border-violet-500/20 bg-violet-500/5 p-3 space-y-1.5'>
                   <div className='flex items-center gap-1.5 font-semibold text-xs text-foreground'>
-                    <Badge variant='outline' className='text-[9px] px-1 py-0 uppercase font-mono'>
-                      STAFF
+                    <Badge variant='secondary' className='text-[9px] px-1 py-0 uppercase font-mono'>
+                      STEP 2
                     </Badge>
-                    <span>Front Desk Staff</span>
+                    <span>Self-Service Sign-up</span>
                   </div>
                   <p className='text-[11px] text-muted-foreground'>
-                    Workshop bookings, walk-in/phone attendee registrations, and waitlist allocations.
+                    The invitee registers via the unique token link and securely creates their credentials.
+                  </p>
+                </div>
+
+                <div className='rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-3 space-y-1.5'>
+                  <div className='flex items-center gap-1.5 font-semibold text-xs text-foreground'>
+                    <Badge variant='secondary' className='text-[9px] px-1 py-0 uppercase font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'>
+                      STEP 3
+                    </Badge>
+                    <span>Account Provisioned</span>
+                  </div>
+                  <p className='text-[11px] text-muted-foreground'>
+                    The new account is activated with designated permissions in the Staff Directory.
                   </p>
                 </div>
               </div>
@@ -293,12 +293,6 @@ export default function AdminDashboard() {
                 <Link href={ROUTES.USERS_ROOT} className='gap-2'>
                   <Users className='h-3.5 w-3.5 text-blue-500' />
                   Staff Account Management
-                </Link>
-              </Button>
-              <Button asChild variant='outline' className='w-full justify-start text-xs h-9' size='sm'>
-                <Link href={ROUTES.AUDIT_LOGS_ROOT} className='gap-2'>
-                  <ShieldCheck className='h-3.5 w-3.5 text-emerald-500' />
-                  Audit Logs & Governance
                 </Link>
               </Button>
             </CardContent>
